@@ -1,4 +1,4 @@
-current_dir=$(find . -name MERN_Redux)
+current_dir=$(find . -name MERN_TodoList)
 cd $current_dir/frontend
 npm install 
 nohup npm run start &
