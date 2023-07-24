@@ -34,7 +34,6 @@ const Navbar = () => {
       </div>
       <div id="gap">
         <h3>
-          {" "}
           <Link className="centre_logo" to="/" style={{textDecoration: "none"}}>
             <span> Pradeep'S TODO list</span>
           </Link>

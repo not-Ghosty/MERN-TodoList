@@ -836,3 +836,81 @@ input[type="checkbox"] {
     transform: translateX(100%);
   }
 }
+
+@media screen and (min-width: 600px) and (max-width: 850px) {
+  #login_div .form {
+    width: 50%;
+  }
+
+  .navbar #logo {
+    width: 25%;
+  }
+  .navbar #gap {
+    width: 50%;
+  }
+  .navbar #login {
+    width: 25%;
+  }
+  .centre_logo {
+    width: 100%;
+  }
+  .navbar #gap span {
+    font-size: small;
+    letter-spacing: 2px;
+  }
+  .body {
+    width: 850px;
+  }
+}
+
+@media screen and (min-width: 300px) and (max-width: 599px) {
+  #login_div .form {
+    width: 80%;
+  }
+  .navbar {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  .navbar #logo {
+    width: 25%;
+  }
+  .navbar #gap {
+    width: 50%;
+  }
+  .navbar #login {
+    width: 25%;
+  }
+  .navbar #login .custom-btn btn {
+    width: 80%;
+    font-size: small;
+  }
+
+  .navbar #gap span {
+    font-size: small;
+    letter-spacing: 2px;
+  }
+  .navbar #gap h3 {
+    display: inline-block;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  .body {
+    width: 650px;
+  }
+
+  .card {
+    width: 100%;
+  }
+
+  .output {
+    width: 90%;
+  }
+  .lists {
+    width: 80%;
+  }
+}
