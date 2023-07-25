@@ -2,32 +2,27 @@ import {createSlice} from "@reduxjs/toolkit";
 
 const DataSlice = createSlice({
   name: "API",
-  initialState: [{}],
+  initialState: {
+    data: [],
+  },
   reducers: {
     set(state, action) {
-      return action.payload;
+      state.data = action.payload;
+      return;
     },
     add(state, action) {
-      state.unshift(action.payload);
-      return state;
+      state.data.unshift(action.payload);
+      return;
     },
     remove(state, action) {
-      return state.filter((item) => item._id !== action.payload);
+      state.data = state.data.filter((item) => item._id !== action.payload);
+      return;
     },
     removeAll() {
       return null;
     },
-    get(state, action) {
-      const id = JSON.stringify(action.payload);
-      console.log(typeof id);
-      const currentstate = state;
-      console.log("Target ID:", id);
-      const data = currentstate.filter((item) => item._id === id);
-      console.log("Matching object:", data);
-      return data;
-    },
   },
 });
 
-export const {set, add, remove, get, removeAll} = DataSlice.actions;
+export const {set, add, remove, removeAll} = DataSlice.actions;
 export default DataSlice.reducer;

@@ -11,17 +11,18 @@ const Signup = () => {
   const [loading, setLoading] = useState(null);
   const navigate = useNavigate();
 
-  const selector = useSelector((state) => state.UserData);
+  const {user} = useSelector((state) => state.UserData);
   const dispatch = useDispatch();
   useEffect(() => {
-    console.log("Auth State:", selector);
-  }, [selector]);
+    console.log("Auth State:", user);
+  }, [user]);
 
   const handleSubmit = (e) => {
-    const payload = {email, password};
     e.preventDefault();
+    const payload = {email, password};
     setLoading(true);
     setError(null);
+
     axios
       .post(`/api/user/signup`, payload)
       .then((response) => {
@@ -30,9 +31,7 @@ const Signup = () => {
         //update redux
         dispatch(login(response.data));
         setLoading(false);
-        setTimeout(() => {
-          navigate("/home");
-        }, 5000);
+        navigate("/home");
       })
       .catch((err) => {
         setLoading(false);

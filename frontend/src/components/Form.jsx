@@ -1,24 +1,20 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import "../global.css";
 import axios from "axios";
 import {useDispatch, useSelector} from "react-redux";
 import {add} from "../store/DataSlice";
 
-const Form = ({callback}) => {
+const Form = () => {
   const [title, setTitle] = useState("");
   const [duration, setDuration] = useState("");
   const [valid, setValid] = useState(false);
   const [valid2, setValid2] = useState(false);
 
-  const selector = useSelector((state) => state.APIData);
   const {user} = useSelector((state) => state.UserData);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    callback(selector);
-  }, [callback, selector]);
-
-  const handlechange = () => {
+  const handlechange = (e) => {
+    e.preventDefault();
     if (title.length === 0 && (duration === "" || duration <= 0)) {
       setValid(true);
       setValid2(true);
@@ -31,17 +27,14 @@ const Form = ({callback}) => {
       axios
         .post("/api/todolist", payload, {
           headers: {
-            "Content-Type": "application/json",
             Authorization: `Bearer ${user.token}`,
           },
         })
         .then((response) => {
-          const data = response.data;
-          dispatch(add(data));
+          dispatch(add(response.data));
           setTitle("");
           setDuration("");
         })
-
         .catch((err) => {
           console.log(err);
         });
@@ -49,7 +42,7 @@ const Form = ({callback}) => {
   };
   return (
     <div className="container">
-      <div className="card">
+      <form className="card" onSubmit={handlechange}>
         <p className="login">Add a New Task</p>
         <div className="inputs">
           <div className="inputBox">
@@ -62,7 +55,7 @@ const Form = ({callback}) => {
                 setTitle(e.target.value);
                 setValid(false);
               }}
-              required="required"
+              required="true"
             />
             <span className="user">title</span>
           </div>
@@ -76,15 +69,13 @@ const Form = ({callback}) => {
                 setDuration(e.target.value);
                 setValid2(false);
               }}
-              required="required"
+              required="true"
             />
             <span>duration</span>
           </div>
         </div>
-        <button className="enter" onClick={handlechange}>
-          Add
-        </button>
-      </div>
+        <button className="enter">Add</button>
+      </form>
     </div>
   );
 };

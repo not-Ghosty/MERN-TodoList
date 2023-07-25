@@ -15,10 +15,10 @@ const Login = () => {
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
-  const selector = useSelector((state) => state.UserData);
+  const {user} = useSelector((state) => state.UserData);
   useEffect(() => {
-    console.log("Auth State:", selector);
-  }, [selector]);
+    console.log("Auth State:", user);
+  }, [user]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -28,14 +28,10 @@ const Login = () => {
     axios
       .post("/api/user/login", payload)
       .then((response) => {
-        //jwt token store in local storage
         localStorage.setItem("user", JSON.stringify(response.data));
-
         dispatch(login(response.data));
         setLoading(false);
         navigate("/home");
-
-        // add login response in redux
       })
       .catch((err) => {
         setInpcolor(true);

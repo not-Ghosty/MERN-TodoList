@@ -25,7 +25,8 @@ const Edit = () => {
       });
   }, [id, user.token]);
 
-  const handleChange = () => {
+  const handleChange = (e) => {
+    e.preventDefault();
     const payload = {title, duration};
 
     axios
@@ -34,8 +35,7 @@ const Edit = () => {
           Authorization: `Bearer ${user.token}`,
         },
       })
-      .then((response) => {
-        console.log(response);
+      .then(() => {
         navigate("/");
       })
       .catch((err) => {
@@ -45,7 +45,7 @@ const Edit = () => {
   return (
     <div className="edit_div">
       <h1>Edit {title}</h1>
-      <div className="todo_card">
+      <form className="todo_card" onSubmit={handleChange}>
         <section className="list_card">
           <h1 id="edit_head">Title: </h1>
           <input
@@ -68,15 +68,11 @@ const Edit = () => {
             }}
             value={duration}
           />
-          <button
-            className="edit_button"
-            onClick={handleChange}
-            title="Update list"
-          >
+          <button className="edit_button" title="Update list">
             Update
           </button>
         </section>
-      </div>
+      </form>
     </div>
   );
 };

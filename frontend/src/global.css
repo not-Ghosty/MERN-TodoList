@@ -860,6 +860,7 @@ input[type="checkbox"] {
   }
   .body {
     width: 850px;
+    height: 200vh;
   }
 }
 
@@ -900,11 +901,12 @@ input[type="checkbox"] {
   }
 
   .body {
-    width: 650px;
+    width: 850px;
+    height: 200vh;
   }
 
   .card {
-    width: 100%;
+    width: 90%;
   }
 
   .output {

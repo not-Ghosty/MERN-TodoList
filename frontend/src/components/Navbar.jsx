@@ -3,20 +3,21 @@ import "../global.css";
 import {Link, useLocation} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {logout} from "../store/AuthSlice";
+import {set} from "../store/DataSlice";
 import {useNavigate} from "react-router-dom";
 
 const Navbar = () => {
-  const selector = useSelector((state) => state.UserData);
+  const {user} = useSelector((state) => state.UserData);
   const dispatch = useDispatch();
 
   const location = useLocation();
   const navigate = useNavigate();
-  let user = selector.user;
   const logoutClick = () => {
     // remove jwt from local storage
     localStorage.removeItem("user");
     //remove from redux
     dispatch(logout());
+    dispatch(set(null));
     navigate("/login");
   };
   return (
